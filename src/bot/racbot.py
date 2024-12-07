@@ -9,12 +9,12 @@ import aiohttp
 import asyncio
 import datetime
 
-import config
+from utils.config import Config
 from utils.context import Context
 
 
 extensions: tuple[str, ...] = (
-
+    'cogs.owner',
 )
 
 
@@ -55,7 +55,7 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             type=discord.ActivityType.watching
         )
         self.logger: logging.Logger = logging.getLogger(__name__)
-        self.config = config
+        self.config = Config
 
     @property
     def owner(self) -> discord.User:
@@ -106,7 +106,7 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
                 self.logger.exception(f'failed to load extension {extension}')
 
     async def start(self) -> None:
-        await super().start(self.config.token)
+        await super().start(self.config.token())
 
     async def close(self) -> None:
         await self.session.close()

@@ -5,7 +5,7 @@ import click
 import logging
 from logging.handlers import RotatingFileHandler
 
-from .bot import RACBot
+from racbot import RACBot
 
 
 class RemoveNoise(logging.Filter):

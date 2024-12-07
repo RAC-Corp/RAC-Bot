@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Union, Callable, Awaitable, Any, Optional
 
 import discord
@@ -10,7 +9,7 @@ import io
 import traceback
 from contextlib import redirect_stdout
 
-from ..bot import RACBot
+from racbot import RACBot
 from utils.context import Context, GuildContext
 
 
