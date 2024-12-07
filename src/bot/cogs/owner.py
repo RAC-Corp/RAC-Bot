@@ -199,6 +199,21 @@ class Owner(commands.Cog):
             else:
                 await msg.reply(f'Successfully synced {len(commands)} commands')
 
+    @commands.command()
+    @commands.is_owner()
+    async def uploadcommands(self, ctx: Context):
+        """Upload commands to our website"""
+        
+        command_list: list[dict[str, Any]] = []
+        for command in self.bot.commands:
+            details: dict[str, str] = {
+                'name': command.qualified_name,
+                'description': command.short_doc,
+                'arguments': command.signature
+            }
+            command_list.append(details)
+        await ctx.reply(f'```js\n{command_list}```')
+
 
 async def setup(bot: RACBot):
     await bot.add_cog(Owner(bot))

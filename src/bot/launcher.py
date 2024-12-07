@@ -1,5 +1,5 @@
 import discord
-from contextlib import asynccontextmanager, contextmanager
+from contextlib import contextmanager
 import asyncio
 import click
 import logging

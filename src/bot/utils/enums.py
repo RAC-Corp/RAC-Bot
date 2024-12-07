@@ -15,6 +15,9 @@ class Endpoints(Enum):
     AI_CAI_CREATE = api_url + 'ai/cai/create'
     AI_CAI_HISTORY = api_url + 'ai/cai/history'
 
+    # bot commands endpoints
+    BOT_COMMANDS_UPLOAD_COMMANDS = api_url + 'bot/commands/upload'
+
     # utility endpoints
     UTILITY_PING = api_url + 'utilities/ping'
 

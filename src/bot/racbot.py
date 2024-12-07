@@ -14,7 +14,10 @@ from utils.context import Context
 
 
 extensions: tuple[str, ...] = (
+    'cogs.meta',
     'cogs.owner',
+    # 'cogs.roblox',
+    'cogs.utility',
 )
 
 
@@ -97,7 +100,13 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
         await self.process_commands(message)
 
     async def setup_hook(self) -> None:
-        self.session: aiohttp.ClientSession = aiohttp.ClientSession()
+        timeout: aiohttp.ClientTimeout = aiohttp.ClientTimeout(
+            total=30,
+            connect=5,
+            sock_connect=5,
+            sock_read=10
+        )
+        self.session: aiohttp.ClientSession = aiohttp.ClientSession(timeout=timeout)
         
         for extension in extensions:
             try:

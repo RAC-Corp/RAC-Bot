@@ -31,3 +31,19 @@ discord.ext.commands.errors.ExtensionFailed: Extension 'cogs.owner' raised an er
 [2024-12-07 11:20:43] [INFO   ] discord.client: logging in using static token
 [2024-12-07 11:20:44] [INFO   ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 56031a97570ac10c077b38aeafdab132).
 [2024-12-07 11:20:46] [INFO   ] racbot: Ready: RAC#8732 (ID: 1221491594516103188)
+[2024-12-07 12:21:16] [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2024-12-07 12:21:16] [INFO   ] discord.client: logging in using static token
+[2024-12-07 12:21:17] [INFO   ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d2355abb91d3f13b517ce018de48e60b).
+[2024-12-07 12:21:19] [INFO   ] racbot: Ready: RAC#8732 (ID: 1221491594516103188)
+[2024-12-07 12:24:49] [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2024-12-07 12:24:49] [INFO   ] discord.client: logging in using static token
+[2024-12-07 12:24:50] [INFO   ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c174d0b701591b8c386aad91671b8b86).
+[2024-12-07 12:24:52] [INFO   ] racbot: Ready: RAC#8732 (ID: 1221491594516103188)
+[2024-12-07 12:39:31] [ERROR  ] racbot: In uploadcommands:
+Traceback (most recent call last):
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\discord\ext\commands\core.py", line 235, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Repositories\RAC-Bot\src\bot\cogs\owner.py", line 209, in uploadcommands
+    js.update(
+ValueError: dictionary update sequence element #0 has length 1; 2 is required
