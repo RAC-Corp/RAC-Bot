@@ -1,7 +1,11 @@
 from enum import Enum
+from ..config import api_key
 
 
 api_url: str = 'https://api.rac-corp.net/'
+api_headers: dict[str, str] = {
+    'Authorization': api_key
+}
 
 
 class Endpoints(Enum):
