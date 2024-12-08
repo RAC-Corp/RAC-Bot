@@ -4,7 +4,8 @@ from .config import Config
 
 api_url: str = 'https://api.rac-corp.net/'
 api_headers: dict[str, str] = {
-    'Authorization': Config.api_key()
+    'Authorization': Config.api_key(),
+    'User-Agent': 'RAC-Bot'
 }
 
 
