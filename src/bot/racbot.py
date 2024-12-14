@@ -16,7 +16,7 @@ from utils.context import Context
 extensions: tuple[str, ...] = (
     'cogs.meta',
     'cogs.owner',
-    # 'cogs.roblox',
+    'cogs.roblox',
     'cogs.utility',
 )
 

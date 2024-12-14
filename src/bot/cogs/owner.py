@@ -202,7 +202,7 @@ class Owner(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def uploadcommands(self, ctx: Context):
-        """Upload commands to our website"""
+        """Upload commands to our website""" # TODO
         
         command_list: list[dict[str, Any]] = []
         for command in self.bot.commands:

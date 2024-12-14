@@ -1,0 +1,98 @@
+[2024-12-14 11:13:21] [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2024-12-14 11:13:21] [INFO   ] discord.client: logging in using static token
+[2024-12-14 11:13:21] [INFO   ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4c3ff53942f035b08ad579cc4624b1e0).
+[2024-12-14 11:13:23] [INFO   ] racbot: Ready: RAC#8732 (ID: 1221491594516103188)
+[2024-12-14 11:39:45] [WARNING] discord.client: PyNaCl is not installed, voice will NOT be supported
+[2024-12-14 11:39:45] [INFO   ] discord.client: logging in using static token
+[2024-12-14 11:39:46] [INFO   ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 1eb9c668521f8ce9446b235bc002d47c).
+[2024-12-14 11:39:48] [INFO   ] racbot: Ready: RAC#8732 (ID: 1221491594516103188)
+[2024-12-14 11:40:27] [ERROR  ] racbot: In iisr permban:
+Traceback (most recent call last):
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\discord\ext\commands\core.py", line 235, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Repositories\RAC-Bot\src\bot\cogs\roblox.py", line 93, in iisr_perm_ban
+    async with self.bot.session.post(
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 1423, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 728, in _request
+    await resp.start(conn)
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client_reqrep.py", line 1055, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\streams.py", line 667, in read
+    await self._waiter
+aiohttp.client_exceptions.SocketTimeoutError: Timeout on reading data from socket
+[2024-12-14 11:42:05] [ERROR  ] racbot: In iisr permban:
+Traceback (most recent call last):
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\discord\ext\commands\core.py", line 235, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Repositories\RAC-Bot\src\bot\cogs\roblox.py", line 93, in iisr_perm_ban
+    async with self.bot.session.post(
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 1423, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 728, in _request
+    await resp.start(conn)
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client_reqrep.py", line 1055, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\streams.py", line 667, in read
+    await self._waiter
+aiohttp.client_exceptions.SocketTimeoutError: Timeout on reading data from socket
+[2024-12-14 11:44:46] [ERROR  ] racbot: In iisr tempban:
+Traceback (most recent call last):
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\discord\ext\commands\core.py", line 235, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Repositories\RAC-Bot\src\bot\cogs\roblox.py", line 61, in iisr_temp_ban
+    async with self.bot.session.post(
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 1423, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 728, in _request
+    await resp.start(conn)
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client_reqrep.py", line 1055, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\streams.py", line 667, in read
+    await self._waiter
+aiohttp.client_exceptions.SocketTimeoutError: Timeout on reading data from socket
+[2024-12-14 11:46:30] [ERROR  ] racbot: In ping api:
+Traceback (most recent call last):
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\discord\ext\commands\core.py", line 235, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Repositories\RAC-Bot\src\bot\cogs\utility.py", line 34, in ping_api
+    async with self.bot.session.get(Endpoints.UTILITY_PING.value, headers=api_headers) as resp:
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 1423, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 728, in _request
+    await resp.start(conn)
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client_reqrep.py", line 1055, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\streams.py", line 667, in read
+    await self._waiter
+aiohttp.client_exceptions.SocketTimeoutError: Timeout on reading data from socket
+[2024-12-14 11:47:50] [ERROR  ] racbot: In ping api:
+Traceback (most recent call last):
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\discord\ext\commands\core.py", line 235, in wrapped
+    ret = await coro(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Repositories\RAC-Bot\src\bot\cogs\utility.py", line 34, in ping_api
+    async with self.bot.session.get(Endpoints.UTILITY_PING.value, headers=api_headers) as resp:
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 1423, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client.py", line 728, in _request
+    await resp.start(conn)
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\client_reqrep.py", line 1055, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Repositories\RAC-Bot\venv\Lib\site-packages\aiohttp\streams.py", line 667, in read
+    await self._waiter
+aiohttp.client_exceptions.SocketTimeoutError: Timeout on reading data from socket

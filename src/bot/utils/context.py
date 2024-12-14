@@ -137,6 +137,14 @@ class Context(commands.Context):
         embed.set_author(name=self.author.display_name, icon_url=self.author.display_avatar.url)
         await self.reply(embed=embed)
 
+    async def handle_error_body(self, code: int, body: Any, detail: Optional[str] = None):
+        embed = discord.Embed(color=discord.Colour.red())
+        embed.title = 'Command Error'
+        embed.description = f'HTTP Exception: {code} ({detail if detail else "No Status Detail"})'
+        embed.add_field(name='Response Body', value=f'```js\n{body}```')
+        embed.set_author(name=self.author.display_name, icon_url=self.author.display_avatar.url)
+        await self.reply(embed=embed)
+
     async def handle_error_no_http(self, error: Any):
         embed = discord.Embed(color=discord.Colour.red())
         embed.title = 'Command Error'

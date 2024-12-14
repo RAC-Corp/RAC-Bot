@@ -19,6 +19,10 @@ class Endpoints(Enum):
     # bot commands endpoints
     BOT_COMMANDS_UPLOAD_COMMANDS = api_url + 'bot/commands/upload'
 
+    # player endpoints
+    TEMP_BAN_CREATE = api_url + 'roblox/players/ban/temp'
+    PERM_BAN_CREATE = api_url + 'roblox/players/ban/perm'
+
     # utility endpoints
     UTILITY_PING = api_url + 'utilities/ping'
 
