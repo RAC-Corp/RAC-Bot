@@ -57,7 +57,15 @@ class AI(commands.GroupCog, group_name='ai'):
                     return await ctx.handle_error_body(status, body, reason)
                 
                 if type(body) == dict:
-                    await ctx.reply(body.get('response'))
+                    response: Union[str, None] = body.get('response')
+                    if not response:
+                        return await ctx.handle_error_no_http('API did not return a response')
+                    
+                    if len(response) > 2000:
+                        message = await ctx.reply(response[:2000])
+                        await message.reply(response[2000:])
+                    else:
+                        await ctx.reply(response)
                 else:
                     await ctx.handle_error_no_http('API returned a non-JSON response')
 
