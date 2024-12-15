@@ -22,6 +22,10 @@ class AI(commands.GroupCog, group_name='ai'):
         self.request = bot.functions.endpoint_request
         self.variables = bot.variables
 
+    @property
+    def display_emoji(self) -> discord.PartialEmoji:
+        return discord.PartialEmoji(name='\N{ROBOT FACE}')
+
     @commands.hybrid_command()
     async def gemini(self, ctx: Context, *, prompt: str):
         """Chat with Google Gemini

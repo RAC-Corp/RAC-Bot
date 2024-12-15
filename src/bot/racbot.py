@@ -16,6 +16,7 @@ from utils.functions import Functions
 
 extensions: tuple[str, ...] = (
     'cogs.ai',
+    'cogs.fun',    
     'cogs.meta',
     'cogs.owner',
     'cogs.roblox',

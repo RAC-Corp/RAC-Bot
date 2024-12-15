@@ -27,6 +27,10 @@ class Roblox(commands.Cog):
         self.request = bot.functions.endpoint_request
         self.variables = bot.variables
 
+    @property
+    def display_emoji(self) -> discord.PartialEmoji:
+        return discord.PartialEmoji(name='\N{VIDEO GAME}')
+
     @commands.group()
     async def iisr(self, ctx: Context):
         pass
@@ -42,7 +46,7 @@ class Roblox(commands.Cog):
             flags (IISRTempBanFlags): The flags to use
         
         Usage:
-            !!iisr tempban -target <str> -duration <str> -serverid <str> -reason <str?>
+            !!iisr tempban -target <str> -duration <str> -serverid <str> -reason [str]
             !!iisr tempban -target rulebreaker -duration 14 days -serverid asd -reason breaking rules
         """
 
@@ -89,7 +93,7 @@ class Roblox(commands.Cog):
             flags (IISRPermBanFlags): The flags to use
         
         Usage:
-            !!iisr permban -target <str> -serverid <str> -reason <str?>
+            !!iisr permban -target <str> -serverid <str> -reason [str]
             !!iisr permban -target rulebreaker -serverid asd -reason breaking rules
         """
 

@@ -9,7 +9,7 @@ import io
 import traceback
 from contextlib import redirect_stdout
 
-from racbot import RACBot
+from racbot import RACBot, extensions
 from utils.context import Context, GuildContext
 
 
@@ -134,6 +134,19 @@ class Owner(commands.Cog):
             await ctx.handle_error(code=400, error=str(e))
         else:
             await ctx.reply(f'Reloaded `{cog}`')
+
+    @commands.command()
+    @commands.is_owner()
+    async def reloadall(self, ctx: Context):
+        """Reloads all currently loaded cogs"""
+        
+        for extension in extensions:
+            try:
+                await self.bot.reload_extension(extension)
+            except:
+                continue
+        
+        await ctx.reply('done')
 
     @commands.group(invoke_without_command=True, hidden=True)
     @commands.is_owner()

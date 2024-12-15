@@ -245,7 +245,7 @@ class Meta(commands.Cog):
     def display_emoji(self) -> discord.PartialEmoji:
         return discord.PartialEmoji(name='\N{GEAR}')
 
-    @commands.command(invoke_without_command=True)
+    @commands.command()
     async def invite(self, ctx: Context):
         """Get the invite link of the bot"""
 
