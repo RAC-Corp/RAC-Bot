@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Any
 
 import discord
 from discord.ext import commands
@@ -11,14 +11,17 @@ import datetime
 
 from utils.config import Config
 from utils.context import Context
+from utils.functions import Functions
 
 
 extensions: tuple[str, ...] = (
+    'cogs.ai',
     'cogs.meta',
     'cogs.owner',
     'cogs.roblox',
     'cogs.utility',
 )
+prefix: str = '!!'
 
 
 class RACBot(commands.Bot): # change later to AutoShardedBot
@@ -38,7 +41,7 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             guilds=True
         )
         super().__init__(
-            command_prefix=commands.when_mentioned_or('r.'),
+            command_prefix=commands.when_mentioned_or(prefix),
             allowed_mentions=allowed_mentions,
             intents=intents,
             strip_after_prefix=True,
@@ -54,7 +57,7 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
         self.identifies: defaultdict[int, list[datetime.datetime]] = defaultdict(list)
 
         self.activity: discord.Activity = discord.Activity(
-            name='for r.', 
+            name=f'for {prefix}', 
             type=discord.ActivityType.watching
         )
         self.logger: logging.Logger = logging.getLogger(__name__)
@@ -102,11 +105,19 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
     async def setup_hook(self) -> None:
         timeout: aiohttp.ClientTimeout = aiohttp.ClientTimeout(
             total=30,
-            connect=5,
-            sock_connect=5,
+            connect=10,
+            sock_connect=10,
             sock_read=10
         )
         self.session: aiohttp.ClientSession = aiohttp.ClientSession(timeout=timeout)
+        self.functions: Functions = Functions(self)
+        self.variables: dict[str, Any] = {
+            'ok_status_codes': [
+                200,
+                201,
+                204
+            ]
+        }
         
         for extension in extensions:
             try:

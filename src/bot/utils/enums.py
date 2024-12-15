@@ -9,6 +9,11 @@ api_headers: dict[str, str] = {
 }
 
 
+class CommandSignatures(Enum):
+    iisr_temp_ban = '-target <str> -duration <str> -serverid <str> -reason <str?>'
+    iisr_perm_ban = '-target <str> -serverid <str> -reason <str?>'
+
+
 class Endpoints(Enum):
     # ai endpoints
     AI_GEMINI_CREATE = api_url + 'ai/gemini/create'
