@@ -8,10 +8,14 @@ import logging
 import aiohttp
 import asyncio
 import datetime
+import sys
 
 from utils.config import Config
 from utils.context import Context
 from utils.functions import Functions
+
+
+sys.path.append('/cogs/roblox/iisr.py')
 
 
 extensions: tuple[str, ...] = (
@@ -19,7 +23,7 @@ extensions: tuple[str, ...] = (
     'cogs.fun',    
     'cogs.meta',
     'cogs.owner',
-    'cogs.roblox',
+    'cogs.roblox.iisr',
     'cogs.utility',
 )
 prefix: str = '!!'
@@ -138,10 +142,10 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             original = error.original
             if not isinstance(original, discord.HTTPException):
                 self.logger.exception('In %s:', ctx.command.qualified_name, exc_info=original)
-            if ctx.author.id == ctx.bot.owner_id:
+            if ctx.author.id == self.owner_id:
                 await ctx.handle_error_no_http(str(error))
             else:
-                await ctx.handle_error(500, 'woops')
+                await ctx.handle_error_no_http('Something went wrong')
         elif isinstance(error, (commands.BadArgument, commands.MissingRequiredArgument, commands.ArgumentParsingError)):
             await ctx.show_command_signature()
         elif isinstance(error, commands.BotMissingPermissions):

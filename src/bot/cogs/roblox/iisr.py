@@ -18,8 +18,8 @@ from utils.flags import (
 )
 
 
-class Roblox(commands.Cog):
-    """Roblox commands for our games"""
+class IISR(commands.Cog):
+    """IISR game commands"""
 
     def __init__(self, bot: RACBot) -> None:
         self.bot: RACBot = bot
@@ -31,9 +31,10 @@ class Roblox(commands.Cog):
     def display_emoji(self) -> discord.PartialEmoji:
         return discord.PartialEmoji(name='\N{VIDEO GAME}')
 
-    @commands.group()
+    @commands.group(invoke_without_command=True)
     async def iisr(self, ctx: Context):
-        pass
+        if ctx.invoked_subcommand is None:
+            await ctx.send_help(ctx.command)
 
     @iisr.command(name='tempban', usage=CommandSignatures.iisr_temp_ban.value)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -132,4 +133,4 @@ class Roblox(commands.Cog):
 
 
 async def setup(bot: RACBot):
-    await bot.add_cog(Roblox(bot))
+    await bot.add_cog(IISR(bot))
