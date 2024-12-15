@@ -115,7 +115,7 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             sock_read=10
         )
         self.session: aiohttp.ClientSession = aiohttp.ClientSession(timeout=timeout)
-        self.functions: Functions = Functions(self)
+        self.functions: Functions = Functions(self, False)
         self.variables: dict[str, Any] = {
             'ok_status_codes': [
                 200,

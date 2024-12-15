@@ -17,6 +17,8 @@ class CommandSignatures(Enum):
 class Endpoints(Enum):
     # ai endpoints
     AI_GEMINI_CREATE = api_url + 'ai/gemini/create'
+    AI_CLOUDFLARE_TEXT_CREATE = api_url + 'ai/cf/text/create'
+    AI_CLOUDFLARE_IMAGE_CREATE = api_url + 'ai/cf/image/create'
     AI_MODERATION_TEXT = api_url + 'ai/moderation/text'
     AI_CAI_CREATE = api_url + 'ai/cai/create'
     AI_CAI_HISTORY = api_url + 'ai/cai/history'

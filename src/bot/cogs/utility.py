@@ -1,6 +1,7 @@
 from typing import Any
 
 import discord
+from discord import app_commands
 from discord.ext import commands
 
 import unicodedata
@@ -10,7 +11,9 @@ from utils.context import Context
 from utils.enums import Endpoints, api_headers
 
 
-class Utility(commands.Cog):
+@app_commands.allowed_installs(guilds=True, users=True)
+@app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
+class Utility(commands.GroupCog, name='utility'):
     """Utility commands"""
 
     def __init__(self, bot: RACBot) -> None:

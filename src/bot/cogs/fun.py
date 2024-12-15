@@ -46,7 +46,7 @@ class Fun(commands.GroupCog, group_name='fun'):
     def display_emoji(self) -> discord.PartialEmoji:
         return discord.PartialEmoji(name='\N{SMILING FACE WITH OPEN MOUTH}')
 
-    @commands.command()
+    @commands.hybrid_command()
     async def textwall(self, ctx: Context, *, text: str):
         """Create a wall of text
 
@@ -64,7 +64,7 @@ class Fun(commands.GroupCog, group_name='fun'):
 
         await ctx.safe_reply(content)
 
-    @commands.command(aliases=['regional'])
+    @commands.hybrid_command(aliases=['regional'])
     async def regionalify(self, ctx: Context, *, text: str):
         """Replace letters and numbers with regional indicator blocks
 
