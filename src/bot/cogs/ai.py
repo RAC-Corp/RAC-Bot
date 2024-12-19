@@ -29,6 +29,7 @@ class AI(commands.GroupCog, group_name='ai'):
         return discord.PartialEmoji(name='\N{ROBOT FACE}')
 
     @commands.hybrid_command()
+    @commands.cooldown(1, 2.5, commands.BucketType.user)
     async def gemini(self, ctx: Context, *, prompt: str):
         """Chat with Google Gemini
 
@@ -76,6 +77,7 @@ class AI(commands.GroupCog, group_name='ai'):
                     await ctx.handle_error_no_http('API returned a non-JSON response')
 
     @commands.hybrid_command()
+    @commands.cooldown(1, 2.5, commands.BucketType.user)
     async def hermes(self, ctx: Context, *, prompt: str):
         """Chat with Hermes 2 AI model
 
@@ -115,6 +117,7 @@ class AI(commands.GroupCog, group_name='ai'):
                     await ctx.handle_error_no_http('API returned a non-JSON response')
 
     @commands.hybrid_command()
+    @commands.cooldown(1, 2.5, commands.BucketType.user)
     async def imagine(self, ctx: Context, *, prompt: str):
         """Generate an image using Stable Diffusion
 
@@ -129,7 +132,7 @@ class AI(commands.GroupCog, group_name='ai'):
 
         json: dict[str, Union[str, int]] = {
             'prompt': prompt,
-            'steps': 10,
+            'steps': 16,
             'strength': 1,
             'height': 512,
             'width': 512

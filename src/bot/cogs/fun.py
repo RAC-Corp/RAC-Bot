@@ -62,7 +62,7 @@ class Fun(commands.GroupCog, group_name='fun'):
         for i in range(len(text)):
             content += f'\n{text[i:]} {text[:i]}'
 
-        await ctx.safe_reply(content)
+        await ctx.safe_reply(f'```{content}```')
 
     @commands.hybrid_command(aliases=['regional'])
     async def regionalify(self, ctx: Context, *, text: str):

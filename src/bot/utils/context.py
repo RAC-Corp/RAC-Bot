@@ -124,20 +124,23 @@ class Context(commands.Context):
         await view.wait()
         return view.value
 
-    async def show_command_signature(self, reply: bool = True):
+    async def show_command_signature(self, reply: bool = True) -> None:
         if reply:
             await self.reply(f'```{self.prefix}{self.command.qualified_name} {self.command.signature}```')
         else:
             await self.send(f'```{self.prefix}{self.command.qualified_name} {self.command.signature}```')
 
-    async def handle_error(self, code: int, error: Any):
+    def get_command_signature(self) -> str:
+        return f'{self.prefix}{self.command.qualified_name} {self.command.signature}'
+
+    async def handle_error(self, code: int, error: Any) -> None:
         embed = discord.Embed(color=discord.Colour.red())
         embed.title = 'Command Error'
         embed.description = f'HTTP Exception: {code} ({error})'
         embed.set_author(name=self.author.display_name, icon_url=self.author.display_avatar.url)
         await self.reply(embed=embed)
 
-    async def handle_error_body(self, code: int, body: Any, detail: Optional[str] = None):
+    async def handle_error_body(self, code: int, body: Any, detail: Optional[str] = None) -> None:
         embed = discord.Embed(color=discord.Colour.red())
         embed.title = 'Command Error'
         embed.description = f'HTTP Exception: {code} ({detail if detail else "No Status Detail"})'
@@ -145,7 +148,7 @@ class Context(commands.Context):
         embed.set_author(name=self.author.display_name, icon_url=self.author.display_avatar.url)
         await self.reply(embed=embed)
 
-    async def handle_error_no_http(self, error: Any):
+    async def handle_error_no_http(self, error: Any) -> None:
         embed = discord.Embed(color=discord.Colour.red())
         embed.title = 'Command Error'
         embed.description = error

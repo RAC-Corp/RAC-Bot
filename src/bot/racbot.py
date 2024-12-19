@@ -146,8 +146,22 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
                 await ctx.handle_error_no_http(str(error))
             else:
                 await ctx.handle_error_no_http('Something went wrong')
-        elif isinstance(error, (commands.BadArgument, commands.MissingRequiredArgument, commands.ArgumentParsingError)):
-            await ctx.show_command_signature()
+        elif isinstance(error, commands.BadArgument):
+            signature: str = f'```{ctx.get_command_signature()}```'
+            embed = discord.Embed(title='Command Argument Error', color=discord.Colour.red())
+            embed.description = f'Bad Argument\n{signature}'
+            await ctx.reply(embed=embed)
+        elif isinstance(error, commands.MissingRequiredArgument):
+            signature: str = f'```{ctx.get_command_signature()}```'
+            embed = discord.Embed(title='Command Argument Error', color=discord.Colour.red())
+            embed.description = f'Missing Required Argument\n{signature}'
+            embed.add_field(name='Argument Missing', value=error.param)
+            await ctx.reply(embed=embed)
+        elif isinstance(error, commands.ArgumentParsingError):
+            signature: str = f'```{ctx.get_command_signature()}```'
+            embed = discord.Embed(title='Command Argument Error', color=discord.Colour.red())
+            embed.description = f'Argument Parsing Error\n{signature}'
+            await ctx.reply(embed=embed)
         elif isinstance(error, commands.BotMissingPermissions):
             perms = error.missing_permissions
             command = ctx.command if ctx.command else 'This command'
