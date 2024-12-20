@@ -149,17 +149,20 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
         elif isinstance(error, commands.BadArgument):
             signature: str = f'```{ctx.get_command_signature()}```'
             embed = discord.Embed(title='Command Argument Error', color=discord.Colour.red())
+            embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
             embed.description = f'Bad Argument\n{signature}'
             await ctx.reply(embed=embed)
         elif isinstance(error, commands.MissingRequiredArgument):
             signature: str = f'```{ctx.get_command_signature()}```'
             embed = discord.Embed(title='Command Argument Error', color=discord.Colour.red())
+            embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
             embed.description = f'Missing Required Argument\n{signature}'
-            embed.add_field(name='Argument Missing', value=error.param)
+            embed.add_field(name='Argument Missing', value=f'`{error.param}`')
             await ctx.reply(embed=embed)
         elif isinstance(error, commands.ArgumentParsingError):
             signature: str = f'```{ctx.get_command_signature()}```'
             embed = discord.Embed(title='Command Argument Error', color=discord.Colour.red())
+            embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
             embed.description = f'Argument Parsing Error\n{signature}'
             await ctx.reply(embed=embed)
         elif isinstance(error, commands.BotMissingPermissions):
