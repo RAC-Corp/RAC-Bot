@@ -155,17 +155,15 @@ class AI(commands.GroupCog, group_name='ai'):
                 if type(body) == bytes:
                     image_file = io.BytesIO(body)
                     file = discord.File(image_file, filename='imagine.png')
-                    file_size: float = image_file.tell() / 1024
-
+                    
                     embed = discord.Embed()
                     embed.description = f'Prompt: {prompt}'
                     embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
                     embed.set_image(url='attachment://imagine.png')
-                    embed.set_footer(text=f'512x512, {file_size:.2f} KB')
 
                     await ctx.reply(file=file, embed=embed)
                 else:
-                    await ctx.handle_error_no_http('API returned a non-image response')
+                    raise GeneralException('Response mimetype was not image/png')
 
 
 async def setup(bot: RACBot):

@@ -24,6 +24,10 @@ class RoGuessr(commands.Cog):
         self.request = bot.functions.endpoint_request
         self.variables = bot.variables
 
+    @property
+    def display_emoji(self) -> discord.PartialEmoji:
+        return discord.PartialEmoji(name='\N{BLACK QUESTION MARK ORNAMENT}')
+
     @commands.group(invoke_without_command=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
     @commands.guild_only()

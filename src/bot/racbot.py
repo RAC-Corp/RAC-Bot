@@ -22,6 +22,7 @@ sys.path.append('/cogs/roblox/roguessr.py')
 
 extensions: tuple[str, ...] = (
     'cogs.ai',
+    'cogs.api',
     'cogs.fun',    
     'cogs.meta',
     'cogs.owner',

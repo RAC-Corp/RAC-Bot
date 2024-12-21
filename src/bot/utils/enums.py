@@ -26,6 +26,9 @@ class Endpoints(Enum):
     # bot commands endpoints
     bot_commands_upload_commands = api_url + 'bot/commands/upload'
 
+    # fun endpoints
+    fun1_wordcloud = api_url + 'fun/1/wordcloud'
+
     # iisr player endpoints
     iisr_temp_ban_create = api_url + 'roblox/iisr/players/ban/temp'
     iisr_perm_ban_create = api_url + 'roblox/iisr/players/ban/perm'

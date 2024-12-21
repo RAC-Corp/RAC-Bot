@@ -30,7 +30,7 @@ class IISR(commands.Cog):
 
     @property
     def display_emoji(self) -> discord.PartialEmoji:
-        return discord.PartialEmoji(name='\N{VIDEO GAME}')
+        return discord.PartialEmoji(name='\N{BLACK QUESTION MARK ORNAMENT}')
 
     @commands.group(invoke_without_command=True)
     @commands.cooldown(1, 3, commands.BucketType.user)
@@ -79,7 +79,7 @@ class IISR(commands.Cog):
                 if type(body) == dict:
                     await ctx.reply(f'```js\n{body}```')
                 else:
-                    await ctx.handle_error_no_http('API returned a non-JSON response')
+                    raise GeneralException('Response mimetype was not application/json')
 
     @iisr_ban.command(name='temp', usage=CommandSignatures.iisr_temp_ban.value)
     @checks.is_a_mod()
