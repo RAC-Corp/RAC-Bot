@@ -10,6 +10,7 @@ import io
 from racbot import RACBot
 from utils.context import Context
 from utils.enums import Endpoints, api_headers
+from utils.exceptions import HTTPException, GeneralException
 
 
 @app_commands.allowed_installs(guilds=True, users=True)
@@ -54,10 +55,9 @@ class AI(commands.GroupCog, group_name='ai'):
                     timeout=30
                 )
             except TimeoutError:
-                await ctx.handle_error(504, 'Gateway Timeout')
+                raise HTTPException(504, 'Gateway Timeout')
             except Exception as e:
-                self.bot.logger.exception(e)
-                await ctx.handle_error_no_http('Something happened')
+                raise commands.CommandInvokeError(e)
             else:
                 status, reason, body = request
                 if status not in self.variables['ok_status_codes']:
@@ -101,10 +101,9 @@ class AI(commands.GroupCog, group_name='ai'):
                     timeout=30
                 )
             except TimeoutError:
-                await ctx.handle_error(504, 'Gateway Timeout')
+                raise HTTPException(504, 'Gateway Timeout')
             except Exception as e:
-                self.bot.logger.exception(e)
-                await ctx.handle_error_no_http('Something happened')
+                raise commands.CommandInvokeError(e)
             else:
                 status, reason, body = request
                 if status not in self.variables['ok_status_codes']:
@@ -145,10 +144,9 @@ class AI(commands.GroupCog, group_name='ai'):
                     timeout=30
                 )
             except TimeoutError:
-                await ctx.handle_error(504, 'Gateway Timeout')
+                raise HTTPException(504, 'Gateway Timeout')
             except Exception as e:
-                self.bot.logger.exception(e)
-                await ctx.handle_error_no_http('Something happened')
+                raise commands.CommandInvokeError(e)
             else:
                 status, reason, body = request
                 if status not in self.variables['ok_status_codes']:

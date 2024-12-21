@@ -31,6 +31,9 @@ class Endpoints(Enum):
     iisr_perm_ban_create = api_url + 'roblox/iisr/players/ban/perm'
     iisr_temp_ban_all_servers = api_url + 'roblox/iisr/players/ban/temp/all-servers'
     iisr_perm_ban_all_servers = api_url + 'roblox/iisr/players/ban/perm/all-servers'
+    iisr_ban_remove = api_url + 'roblox/iisr/players/ban/remove'
+    iisr_ban_remove_all_servers = api_url + 'roblox/iisr/players/ban/remove/all-servers'
+    iisr_bans = api_url + 'roblox/iisr/players/bans'
 
     # utility endpoints
     utility_ping = api_url + 'utilities/ping'

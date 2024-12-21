@@ -167,6 +167,9 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
             embed.description = f'Argument Parsing Error\n{signature}'
             await ctx.reply(embed=embed)
+        elif isinstance(error, commands.CheckFailure):
+            command = ctx.command if ctx.command else 'This command'
+            await ctx.reply(f'⚠ `{command}` requires you to have specific permissions for it to work.')
         elif isinstance(error, commands.BotMissingPermissions):
             perms = error.missing_permissions
             command = ctx.command if ctx.command else 'This command'
@@ -186,7 +189,6 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             embed.description = f'HTTP Exception: {error.status} ({error.detail})'
             if error.body:
                 embed.add_field(name='Error Body', value=f'```{error.body}```')
-
             await ctx.reply(embed=embed)
         elif isinstance(error, GeneralException):
             embed = discord.Embed(title='Command Error', color=discord.Colour.red())
