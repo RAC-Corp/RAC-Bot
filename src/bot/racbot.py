@@ -26,6 +26,7 @@ extensions: tuple[str, ...] = (
     'cogs.meta',
     'cogs.owner',
     'cogs.roblox.iisr',
+    'cogs.roblox.roguessr',
     'cogs.utility',
 )
 prefix: str = '!!'
@@ -188,7 +189,7 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
             embed.description = f'HTTP Exception: {error.status} ({error.detail})'
             if error.body:
-                embed.add_field(name='Error Body', value=f'```{error.body}```')
+                embed.add_field(name='Error Body', value=f'```js\n{error.body}```')
             await ctx.reply(embed=embed)
         elif isinstance(error, GeneralException):
             embed = discord.Embed(title='Command Error', color=discord.Colour.red())

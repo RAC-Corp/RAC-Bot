@@ -52,8 +52,7 @@ class Utility(commands.GroupCog, name='utility'):
             except TimeoutError:
                 raise HTTPException(504, 'Gateway Timeout')
             except Exception as e:
-                self.bot.logger.exception(e)
-                await ctx.handle_error_no_http('woops')
+                raise commands.CommandInvokeError(e)
             else:
                 status, reason, body = request
                 if status not in self.variables['ok_status_codes']:
@@ -63,6 +62,46 @@ class Utility(commands.GroupCog, name='utility'):
                     end_time: float = body['time']
                     total: float = end_time - start_time
                     await ctx.reply(f'took {total:.2f} seconds')
+                else:
+                    raise GeneralException('Response mimetype was not application/json')
+                
+    @commands.group(invoke_without_command=True)
+    async def usage(self, ctx: Context):
+        """Get the process usage of the bot"""
+
+        await ctx.reply(f'not done yet')
+
+    @usage.command(name='api')
+    async def api_usage(self, ctx: Context):
+        """Get the process usage of the API"""
+
+        async with ctx.typing():
+            try:
+                request = await asyncio.wait_for(
+                    self.request(
+                        Endpoints.utility_usage, 
+                        'get',
+                        headers=api_headers
+                    ),
+                    timeout=30
+                )
+            except TimeoutError:
+                raise HTTPException(504, 'Gateway Timeout')
+            except Exception as e:
+                raise commands.CommandInvokeError(e)
+            else:
+                status, reason, body = request
+                if status not in self.variables['ok_status_codes']:
+                    raise HTTPException(status, reason or 'Unknown Error Detail', body)
+                
+                if type(body) == dict:
+                    main: dict = body['main']
+                    storage: dict = body['storage']
+                    cpu_usage: str = main['cpu']
+                    rss_mem: str = main['rssMem']
+                    vms_mem: str = main['vmsMem']
+
+                    await ctx.reply(f'CPU: `{cpu_usage}`\nRSS MEMORY: `{rss_mem}`\nVMS MEMORY: `{vms_mem}`')
                 else:
                     raise GeneralException('Response mimetype was not application/json')
 

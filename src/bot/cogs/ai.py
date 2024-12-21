@@ -74,7 +74,7 @@ class AI(commands.GroupCog, group_name='ai'):
                     else:
                         await ctx.reply(response)
                 else:
-                    await ctx.handle_error_no_http('API returned a non-JSON response')
+                    raise GeneralException('Response mimetype was not application/json')
 
     @commands.hybrid_command()
     @commands.cooldown(1, 2.5, commands.BucketType.user)
@@ -113,7 +113,7 @@ class AI(commands.GroupCog, group_name='ai'):
                     response: str = body['result']['response']
                     await ctx.reply(response)
                 else:
-                    await ctx.handle_error_no_http('API returned a non-JSON response')
+                    raise GeneralException('Response mimetype was not application/json')
 
     @commands.hybrid_command()
     @commands.cooldown(1, 2.5, commands.BucketType.user)
