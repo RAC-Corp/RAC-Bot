@@ -13,9 +13,11 @@ import sys
 from utils.config import Config
 from utils.context import Context
 from utils.functions import Functions
+from utils.exceptions import HTTPException, GeneralException
 
 
 sys.path.append('/cogs/roblox/iisr.py')
+sys.path.append('/cogs/roblox/roguessr.py')
 
 
 extensions: tuple[str, ...] = (
@@ -110,9 +112,9 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
     async def setup_hook(self) -> None:
         timeout: aiohttp.ClientTimeout = aiohttp.ClientTimeout(
             total=30,
-            connect=10,
-            sock_connect=10,
-            sock_read=10
+            connect=15,
+            sock_connect=15,
+            sock_read=20
         )
         self.session: aiohttp.ClientSession = aiohttp.ClientSession(timeout=timeout)
         self.functions: Functions = Functions(self, False)
@@ -178,3 +180,16 @@ class RACBot(commands.Bot): # change later to AutoShardedBot
             await ctx.reply(f'⚠ `{command}` requires the channel to be an NSFW channel for it to work.')
         elif isinstance(error, commands.CommandOnCooldown):
             await ctx.reply(f'You are on cooldown. Try again in {error.cooldown.per} seconds.')
+        elif isinstance(error, HTTPException):
+            embed = discord.Embed(title='Command Error', color=discord.Colour.red())
+            embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
+            embed.description = f'HTTP Exception: {error.status} ({error.detail})'
+            if error.body:
+                embed.add_field(name='Error Body', value=f'```{error.body}```')
+
+            await ctx.reply(embed=embed)
+        elif isinstance(error, GeneralException):
+            embed = discord.Embed(title='Command Error', color=discord.Colour.red())
+            embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
+            embed.description = error.error
+            await ctx.reply(embed=embed)

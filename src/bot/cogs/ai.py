@@ -50,7 +50,7 @@ class AI(commands.GroupCog, group_name='ai'):
         async with ctx.typing():
             try:
                 request = await asyncio.wait_for(
-                    self.request(Endpoints.AI_GEMINI_CREATE, 'post', json=json, headers=api_headers),
+                    self.request(Endpoints.ai_gemini_create, 'post', json=json, headers=api_headers),
                     timeout=30
                 )
             except TimeoutError:
@@ -97,7 +97,7 @@ class AI(commands.GroupCog, group_name='ai'):
         async with ctx.typing():
             try:
                 request = await asyncio.wait_for(
-                    self.request(Endpoints.AI_CLOUDFLARE_TEXT_CREATE, 'post', json=json, headers=api_headers),
+                    self.request(Endpoints.ai_cloudflare_text_create, 'post', json=json, headers=api_headers),
                     timeout=30
                 )
             except TimeoutError:
@@ -141,7 +141,7 @@ class AI(commands.GroupCog, group_name='ai'):
         async with ctx.typing():
             try:
                 request = await asyncio.wait_for(
-                    self.image_request(Endpoints.AI_CLOUDFLARE_IMAGE_CREATE, 'post', json=json, headers=api_headers),
+                    self.image_request(Endpoints.ai_cloudflare_image_create, 'post', json=json, headers=api_headers),
                     timeout=30
                 )
             except TimeoutError:
@@ -157,7 +157,15 @@ class AI(commands.GroupCog, group_name='ai'):
                 if type(body) == bytes:
                     image_file = io.BytesIO(body)
                     file = discord.File(image_file, filename='imagine.png')
-                    await ctx.reply(file=file)
+                    file_size: float = image_file.tell() / 1024
+
+                    embed = discord.Embed()
+                    embed.description = f'Prompt: {prompt}'
+                    embed.set_author(name=ctx.author.name, icon_url=ctx.author.display_avatar.url)
+                    embed.set_image(url='attachment://imagine.png')
+                    embed.set_footer(text=f'512x512, {file_size:.2f} KB')
+
+                    await ctx.reply(file=file, embed=embed)
                 else:
                     await ctx.handle_error_no_http('API returned a non-image response')
 

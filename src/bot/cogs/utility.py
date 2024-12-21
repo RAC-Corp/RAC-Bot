@@ -5,10 +5,13 @@ from discord import app_commands
 from discord.ext import commands
 
 import unicodedata
+import time
+import asyncio
 
 from racbot import RACBot
 from utils.context import Context
 from utils.enums import Endpoints, api_headers
+from utils.exceptions import HTTPException, GeneralException
 
 
 @app_commands.allowed_installs(guilds=True, users=True)
@@ -18,6 +21,8 @@ class Utility(commands.GroupCog, name='utility'):
 
     def __init__(self, bot: RACBot) -> None:
         self.bot: RACBot = bot
+        self.request = bot.functions.endpoint_request
+        self.variables = bot.variables
 
     @property
     def display_emoji(self) -> discord.PartialEmoji:
@@ -33,13 +38,33 @@ class Utility(commands.GroupCog, name='utility'):
     async def ping_api(self, ctx: Context):
         """Ping the API"""
 
+        start_time: float = time.time()
         async with ctx.typing():
-            async with self.bot.session.get(Endpoints.UTILITY_PING.value, headers=api_headers) as resp:
-                if resp.status != 200:
-                    return await ctx.handle_error(resp.status, resp.reason)
+            try:
+                request = await asyncio.wait_for(
+                    self.request(
+                        Endpoints.utility_ping, 
+                        'get',
+                        headers=api_headers
+                    ),
+                    timeout=30
+                )
+            except TimeoutError:
+                raise HTTPException(504, 'Gateway Timeout')
+            except Exception as e:
+                self.bot.logger.exception(e)
+                await ctx.handle_error_no_http('woops')
+            else:
+                status, reason, body = request
+                if status not in self.variables['ok_status_codes']:
+                    raise HTTPException(status, reason or 'Unknown Error Detail', body)
                 
-                data: Any = await resp.json()
-                await ctx.reply(data['response'])
+                if type(body) == dict:
+                    end_time: float = body['time']
+                    total: float = end_time - start_time
+                    await ctx.reply(f'took {total:.2f} seconds')
+                else:
+                    raise GeneralException('Response mimetype was not application/json')
 
     @commands.hybrid_command(aliases=['char'])
     async def charinfo(self, ctx: Context, *, characters: str):

@@ -16,21 +16,23 @@ class CommandSignatures(Enum):
 
 class Endpoints(Enum):
     # ai endpoints
-    AI_GEMINI_CREATE = api_url + 'ai/gemini/create'
-    AI_CLOUDFLARE_TEXT_CREATE = api_url + 'ai/cf/text/create'
-    AI_CLOUDFLARE_IMAGE_CREATE = api_url + 'ai/cf/image/create'
-    AI_MODERATION_TEXT = api_url + 'ai/moderation/text'
-    AI_CAI_CREATE = api_url + 'ai/cai/create'
-    AI_CAI_HISTORY = api_url + 'ai/cai/history'
+    ai_gemini_create = api_url + 'ai/gemini/create'
+    ai_cloudflare_text_create = api_url + 'ai/cf/text/create'
+    ai_cloudflare_image_create = api_url + 'ai/cf/image/create'
+    ai_moderation_text = api_url + 'ai/moderation/text'
+    ai_cai_create = api_url + 'ai/cai/create'
+    ai_cai_history = api_url + 'ai/cai/history'
 
     # bot commands endpoints
-    BOT_COMMANDS_UPLOAD_COMMANDS = api_url + 'bot/commands/upload'
+    bot_commands_upload_commands = api_url + 'bot/commands/upload'
 
     # player endpoints
-    TEMP_BAN_CREATE = api_url + 'roblox/players/ban/temp'
-    PERM_BAN_CREATE = api_url + 'roblox/players/ban/perm'
+    iisr_temp_ban_create = api_url + 'roblox/iisr/players/ban/temp'
+    iisr_perm_ban_create = api_url + 'roblox/iisr/players/ban/perm'
+    iisr_temp_ban_all_servers = api_url + 'roblox/iisr/players/ban/temp/all-servers'
+    iisr_perm_ban_all_servers = api_url + 'roblox/iisr/players/ban/perm/all-servers'
 
     # utility endpoints
-    UTILITY_PING = api_url + 'utilities/ping'
+    utility_ping = api_url + 'utilities/ping'
 
     # TODO: other endpoints
